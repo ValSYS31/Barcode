@@ -1,0 +1,25 @@
+document.getElementById('generateBarcode').addEventListener('click', function() {
+    // Generate the current timestamp in the format YYMMDDHHMMSS
+    const now = new Date();
+    const YY = String(now.getFullYear()).slice(-2);
+    const MM = String(now.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+    const DD = String(now.getDate()).padStart(2, '0');
+    const HH = String(now.getHours()).padStart(2, '0');
+    const MI = String(now.getMinutes()).padStart(2, '0');
+    const SS = String(now.getSeconds()).padStart(2, '0');
+    
+    // Add a unique character or number at the end, here we use a random digit for simplicity
+    const uniqueChar = String(Math.floor(Math.random() * 10));
+    
+    // Combine all parts to create the barcode text
+    const barcodeText = YY + MM + DD + HH + MI + SS + uniqueChar;
+    
+    // Generate the barcode using JsBarcode
+    JsBarcode("#barcode", barcodeText, {
+        format: "CODE128",
+        lineColor: "#000",
+        width: 2,
+        height: 50,
+        displayValue: true
+    });
+});
